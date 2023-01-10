@@ -1,0 +1,18 @@
+---
+#Install Updates on Server 
+- name: Install updates on server
+  hosts: all
+  gather_facts: no  
+  tasks:
+    - name: search and install updates
+      win_updates:
+        category_names:
+          - CriticalUpdates
+          - SecurityUpdates
+          - UpdateRollups
+          - Updates
+          - DefinitionUpdates
+        reboot: yes
+        reboot_timeout: 600
+        log_path: c:\windows\logs\ansible_update_log.txt
+      register: update_result
